@@ -1,7 +1,4 @@
-import { z } from "zod/v4";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertAccountSchema } from "@/database/schema";
-import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,20 +7,20 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { insertAccountSchema } from "@/database/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z, ZodType } from "zod/v4";
 
-const formSchema = insertAccountSchema.pick({
-  name: true,
-});
-
+const formSchema = insertAccountSchema.pick({ name: true });
 type FormValues = z.infer<typeof formSchema>;
 
 type Props = {
   id?: string;
   defaultValues: FormValues;
   onSubmit?: (data: FormValues) => void;
-  onDelete?: (id: string) => void;
+  onDelete?: () => void;
   disabled: boolean;
 };
 
@@ -44,8 +41,11 @@ export const AccountForm = ({
   };
 
   const handleDelete = () => {
-    onDelete?.(id!);
+    onDelete?.();
   };
+
+  console.log({ insertAccountSchema });
+  console.log({ formSchema });
 
   return (
     <Form {...form}>
