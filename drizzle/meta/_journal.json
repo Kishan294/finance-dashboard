@@ -15,6 +15,13 @@
       "when": 1748701031348,
       "tag": "0001_wandering_proudstar",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1749289714454,
+      "tag": "0002_living_ben_urich",
+      "breakpoints": true
     }
   ]
 }
