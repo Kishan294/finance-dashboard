@@ -7,13 +7,14 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { insertCategorySchema } from "@/database/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod/v4";
+import { z } from "zod";
 
-const formSchema = insertCategorySchema.pick({ name: true });
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+});
 type FormValues = z.infer<typeof formSchema>;
 
 type Props = {
@@ -43,9 +44,6 @@ export const CategoryForm = ({
   const handleDelete = () => {
     onDelete?.();
   };
-
-  console.log({ insertCategorySchema });
-  console.log({ formSchema });
 
   return (
     <Form {...form}>
