@@ -56,6 +56,10 @@ export const columns: ColumnDef<ResponseType>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <Actions id={row.original.id} />,
+    cell: ({ row }) => {
+      const rowData = row.original;
+
+      return <Actions id={rowData.id} />;
+    },
   },
 ];

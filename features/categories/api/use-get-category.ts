@@ -7,8 +7,8 @@ export const useGetCategory = (id?: string) => {
     enabled: !!id,
     queryKey: ["category", { id }],
     queryFn: async () => {
-      const response = await client.api.categories.$get({
-        params: {
+      const response = await client.api.categories[":id"]["$get"]({
+        param: {
           id,
         },
       });
@@ -17,7 +17,7 @@ export const useGetCategory = (id?: string) => {
       }
 
       const { data } = await response.json();
-      return data[0];
+      return data;
     },
   });
 };
