@@ -38,9 +38,12 @@ const AccountsPage = () => {
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
       <Card className="border-none drop-shadow-sm">
-        <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
+        <CardHeader className="gap-y-2 flex flex-col lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-xl line-clamp-1">Accounts Page</CardTitle>
-          <Button className="text-sm" onClick={newAccount.onOpen}>
+          <Button
+            className="text-sm w-full lg:w-auto"
+            onClick={newAccount.onOpen}
+          >
             <Plus className="size-4 mr-2" />
             Add New
           </Button>
