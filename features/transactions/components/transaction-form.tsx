@@ -196,7 +196,7 @@ export const TransactionForm = ({
             onClick={handleDelete}
             className="w-full"
           >
-            <Trash className="size-4 mr-2" />
+            <Trash className="mr-2 size-4" />
             Delete Transaction
           </Button>
         )}

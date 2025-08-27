@@ -28,7 +28,7 @@ const defaultFrom = subDays(defaultTo, 90);
 const SEED_TRANSACTIONS: (typeof schema.transactions.$inferInsert)[] = [];
 
 const generateRandomAmount = (
-  category: typeof schema.categories.$inferInsert
+  category: typeof schema.categories.$inferInsert,
 ) => {
   switch (category.name) {
     case "Rent":
@@ -61,7 +61,7 @@ const generateTransactionsForDay = (day: Date) => {
     const isExpense = Math.random() > 0.6;
     const amount = generateRandomAmount(category);
     const formattedAmount = convertAmountToMiliunits(
-      amount * (isExpense ? -1 : 1)
+      amount * (isExpense ? -1 : 1),
     );
 
     SEED_TRANSACTIONS.push({

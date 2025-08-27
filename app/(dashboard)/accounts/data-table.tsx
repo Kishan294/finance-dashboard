@@ -44,7 +44,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [ConfirmationDialog, confirm] = useConfirm(
     "Are you sure?",
-    "Are you sure you want to delete these accounts?"
+    "Are you sure you want to delete these accounts?",
   );
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
                 table.resetRowSelection();
               }
             }}
-            className="ml-auto font-normal text-xs"
+            className="ml-auto text-xs font-normal"
           >
             <Trash className="mr-2 size-4" />
             Delete ({table.getFilteredSelectedRowModel().rows.length})
@@ -109,7 +109,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -128,7 +128,7 @@ export function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

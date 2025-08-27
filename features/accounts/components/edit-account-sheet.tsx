@@ -25,7 +25,7 @@ type FormValues = z.infer<typeof formSchema>;
 export const EditAccountSheet = () => {
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "You are about to delete this account."
+    "You are about to delete this account.",
   );
   const { isOpen, onClose, id } = useOpenAccount();
 
@@ -77,7 +77,7 @@ export const EditAccountSheet = () => {
           </SheetHeader>
           {isLoading ? (
             <div className="absolute inset-0 flex items-center justify-center">
-              <Loader2 className="size-4 text-muted-foreground animate-spin" />
+              <Loader2 className="text-muted-foreground size-4 animate-spin" />
             </div>
           ) : (
             <AccountForm

@@ -78,7 +78,7 @@ export const AccountForm = ({
             onClick={handleDelete}
             className="w-full"
           >
-            <Trash className="size-4 mr-2" />
+            <Trash className="mr-2 size-4" />
             Delete Account
           </Button>
         )}

@@ -20,7 +20,7 @@ export const Actions = ({ id }: Props) => {
   const deleteMutation = useDeleteTransaction(id);
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "You are about to delete this transaction."
+    "You are about to delete this transaction.",
   );
 
   const handleDelete = async () => {
@@ -43,14 +43,14 @@ export const Actions = ({ id }: Props) => {
             disabled={deleteMutation.isPending}
             onClick={() => onOpen(id)}
           >
-            <Edit2 className="size-4 mr-2" />
+            <Edit2 className="mr-2 size-4" />
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem
             disabled={deleteMutation.isPending}
             onClick={handleDelete}
           >
-            <Trash className="size-4 mr-2" />
+            <Trash className="mr-2 size-4" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

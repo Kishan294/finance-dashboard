@@ -17,7 +17,7 @@ const app = new Hono().get(
       from: z.string().optional(),
       to: z.string().optional(),
       accountId: z.string().optional(),
-    })
+    }),
   ),
   async (c) => {
     const auth = getAuth(c);
@@ -43,17 +43,17 @@ const app = new Hono().get(
     async function fetchFinancialData(
       userId: string,
       startDate: Date,
-      endDate: Date
+      endDate: Date,
     ) {
       const data = await db
         .select({
           income:
             sql`sum(CASE WHEN ${transactions.amount} >= 0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
-              Number
+              Number,
             ),
           expenses:
             sql`sum(CASE WHEN ${transactions.amount} < 0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
-              Number
+              Number,
             ),
           remaining: sum(transactions.amount).mapWith(Number),
         })
@@ -64,8 +64,8 @@ const app = new Hono().get(
             accountId ? eq(transactions.accountId, accountId) : undefined,
             eq(accounts.userId, userId),
             gte(transactions.date, startDate),
-            lte(transactions.date, endDate)
-          )
+            lte(transactions.date, endDate),
+          ),
         );
 
       return data;
@@ -74,28 +74,28 @@ const app = new Hono().get(
     const [currentPeriod] = await fetchFinancialData(
       auth.userId,
       startDate,
-      endDate
+      endDate,
     );
 
     const [lastPeriod] = await fetchFinancialData(
       auth.userId,
       lastPeriodStart,
-      lastPeriodEnd
+      lastPeriodEnd,
     );
 
     const incomeChange = calculatePercentageChange(
       currentPeriod.income,
-      lastPeriod.income
+      lastPeriod.income,
     );
 
     const expensesChange = calculatePercentageChange(
       currentPeriod.expenses,
-      lastPeriod.expenses
+      lastPeriod.expenses,
     );
 
     const remainingChange = calculatePercentageChange(
       currentPeriod.remaining,
-      lastPeriod.remaining
+      lastPeriod.remaining,
     );
 
     const category = await db
@@ -112,8 +112,8 @@ const app = new Hono().get(
           eq(accounts.userId, auth.userId),
           lt(transactions.amount, 0),
           gte(transactions.date, startDate),
-          lte(transactions.date, endDate)
-        )
+          lte(transactions.date, endDate),
+        ),
       )
       .groupBy(categories.name)
       .orderBy(desc(sql`SUM(ABS(${transactions.amount}))`));
@@ -122,7 +122,7 @@ const app = new Hono().get(
     const otherCategories = category.slice(3);
     const otherSum = otherCategories.reduce(
       (acc, category) => acc + category.value,
-      0
+      0,
     );
 
     const finalCategories = topCategories;
@@ -138,11 +138,11 @@ const app = new Hono().get(
         date: transactions.date,
         income:
           sql`SUM(CASE WHEN ${transactions.amount} >=0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
-            Number
+            Number,
           ),
         expenses:
           sql`SUM(CASE WHEN ${transactions.amount} <0 THEN ABS(${transactions.amount}) ELSE 0 END)`.mapWith(
-            Number
+            Number,
           ),
       })
       .from(transactions)
@@ -152,8 +152,8 @@ const app = new Hono().get(
           accountId ? eq(transactions.accountId, accountId) : undefined,
           eq(accounts.userId, auth.userId),
           gte(transactions.date, startDate),
-          lte(transactions.date, endDate)
-        )
+          lte(transactions.date, endDate),
+        ),
       )
       .groupBy(transactions.date)
       .orderBy(transactions.date);
@@ -173,7 +173,7 @@ const app = new Hono().get(
         remainingPercentageChange: remainingChange,
       },
     });
-  }
+  },
 );
 
 export default app;

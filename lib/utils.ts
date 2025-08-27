@@ -16,7 +16,7 @@ export function formatCurrency(value: number) {
 
 export const calculatePercentageChange = (
   current: number,
-  previous: number
+  previous: number,
 ) => {
   if (previous === 0) {
     return previous === current ? 0 : 100;
@@ -31,7 +31,7 @@ export const fillMissingDays = (
     expenses: number;
   }[],
   startDate: Date,
-  endDate: Date
+  endDate: Date,
 ) => {
   if (activeDays.length === 0) {
     return [];
@@ -69,14 +69,14 @@ export const formatDateRange = (period?: Period) => {
   if (!period?.from) {
     return `${format(defaultFrom, "LLL dd")} - ${format(
       defaultTo,
-      "LLL dd, y"
+      "LLL dd, y",
     )}`;
   }
 
   if (period?.to) {
     return `${format(period.from, "LLL dd")} - ${format(
       period.to,
-      "LLL dd, y"
+      "LLL dd, y",
     )}`;
   }
 
@@ -89,7 +89,7 @@ export const formatPercentage = (
     addPrefix?: boolean;
   } = {
     addPrefix: false,
-  }
+  },
 ) => {
   const result = new Intl.NumberFormat("en-IN", {
     style: "percent",

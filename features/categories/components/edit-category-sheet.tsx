@@ -24,7 +24,7 @@ type FormValues = z.infer<typeof formSchema>;
 export const EditCategorySheet = () => {
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "You are about to delete this category."
+    "You are about to delete this category.",
   );
   const { isOpen, onClose, id } = useOpenCategory();
 
@@ -76,7 +76,7 @@ export const EditCategorySheet = () => {
           </SheetHeader>
           {isLoading ? (
             <div className="absolute inset-0 flex items-center justify-center">
-              <Loader2 className="size-4 text-muted-foreground animate-spin" />
+              <Loader2 className="text-muted-foreground size-4 animate-spin" />
             </div>
           ) : (
             <CategoryForm

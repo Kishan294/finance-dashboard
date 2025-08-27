@@ -28,7 +28,7 @@ export const ImportCard = ({ data, onSubmit, onCancel }: Props) => {
 
   const onTableHeadSelectChange = (
     columnIndex: number,
-    value: string | null
+    value: string | null,
   ) => {
     setSelectedColumnState((prev) => {
       const newSelectedColumns = { ...prev };
@@ -89,13 +89,13 @@ export const ImportCard = ({ data, onSubmit, onCancel }: Props) => {
   };
 
   return (
-    <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
+    <div className="mx-auto -mt-24 w-full max-w-screen-2xl pb-10">
       <Card className="border-none drop-shadow-sm">
-        <CardHeader className="gap-y-2  lg:flex lg:items-center lg:justify-between">
-          <CardTitle className="text-xl line-clamp-1">
+        <CardHeader className="gap-y-2 lg:flex lg:items-center lg:justify-between">
+          <CardTitle className="line-clamp-1 text-xl">
             Import Transactions
           </CardTitle>
-          <div className="flex flex-col lg:flex-row lg:items-center gap-y-2 lg:gap-x-2">
+          <div className="flex flex-col gap-y-2 lg:flex-row lg:items-center lg:gap-x-2">
             <Button className="text-sm lg:w-auto" onClick={onCancel}>
               Cancel
             </Button>

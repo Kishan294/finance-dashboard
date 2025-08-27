@@ -21,8 +21,8 @@ export const CategoryColumn = ({ id, category, categoryId }: Props) => {
     <div
       onClick={onClick}
       className={cn(
-        "flex items-center cursor-pointer hover:underline",
-        !categoryId && "text-rose-500"
+        "flex cursor-pointer items-center hover:underline",
+        !categoryId && "text-rose-500",
       )}
     >
       {!categoryId && <TriangleAlert className="mr-2 size-4 shrink-0" />}

@@ -29,11 +29,11 @@ export function DatePicker({ value, onChange, disabled }: Props) {
           variant="outline"
           className={cn(
             "w-full justify-start text-left font-normal",
-            !value && "text-muted-foreground"
+            !value && "text-muted-foreground",
           )}
           disabled={disabled}
         >
-          <CalendarIcon className="size-4 mr-2" />
+          <CalendarIcon className="mr-2 size-4" />
           {value ? format(value, "PPP") : <span>Select a date</span>}
         </Button>
       </PopoverTrigger>

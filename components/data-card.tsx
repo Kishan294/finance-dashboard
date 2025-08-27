@@ -60,10 +60,10 @@ export const DataCard = ({
   dateRange,
 }: DataCardProps) => {
   return (
-    <Card className="border-none drop-shadow-sm ">
+    <Card className="border-none drop-shadow-sm">
       <CardHeader className="flex flex-row items-center justify-between gap-x-4">
         <div>
-          <CardTitle className="text-2xl line-clamp-1">{title}</CardTitle>
+          <CardTitle className="line-clamp-1 text-2xl">{title}</CardTitle>
           <CardDescription className="line-clamp-1">
             {dateRange}
           </CardDescription>
@@ -73,7 +73,7 @@ export const DataCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <h1 className="font-bold text-2xl mb-2 line-clamp-1 break-all">
+        <h1 className="mb-2 line-clamp-1 text-2xl font-bold break-all">
           <CountUp
             preserveValue
             start={0}
@@ -85,8 +85,8 @@ export const DataCard = ({
         </h1>
         <p
           className={cn(
-            "text-muted-foreground text-sm line-clamp-1",
-            percentageChange > 0 ? "text-emerald-500" : "text-rose-500"
+            "text-muted-foreground line-clamp-1 text-sm",
+            percentageChange > 0 ? "text-emerald-500" : "text-rose-500",
           )}
         >
           {formatPercentage(percentageChange, { addPrefix: true })} from last
@@ -99,7 +99,7 @@ export const DataCard = ({
 
 export const DataCardLoading = () => {
   return (
-    <Card className="border-none drop-shadow-sm h-[192px]">
+    <Card className="h-[192px] border-none drop-shadow-sm">
       <CardHeader className="flex flex-row items-center justify-between gap-x-4">
         <div className="space-y-2">
           <Skeleton className="h-4 w-24" />
@@ -108,7 +108,7 @@ export const DataCardLoading = () => {
         <Skeleton className="size-12" />
       </CardHeader>
       <CardContent>
-        <Skeleton className="h-10 w-24 mb-2 shrink-0" />
+        <Skeleton className="mb-2 h-10 w-24 shrink-0" />
         <Skeleton className="h-4 w-40 shrink-0" />
       </CardContent>
     </Card>

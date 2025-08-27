@@ -26,7 +26,7 @@ const app = new Hono()
         from: z.string().optional(),
         to: z.string().optional(),
         accountId: z.string().optional(),
-      })
+      }),
     ),
     clerkMiddleware(),
 
@@ -66,13 +66,13 @@ const app = new Hono()
             accountId ? eq(transactions.accountId, accountId) : undefined,
             eq(accounts.userId, auth.userId),
             gte(transactions.date, startDate),
-            lte(transactions.date, endDate)
-          )
+            lte(transactions.date, endDate),
+          ),
         )
         .orderBy(desc(transactions.date));
 
       return c.json({ data });
-    }
+    },
   )
   .get(
     "/:id",
@@ -109,7 +109,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/",
@@ -118,7 +118,7 @@ const app = new Hono()
       "json",
       insertTransactionSchema.omit({
         id: true,
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -137,7 +137,7 @@ const app = new Hono()
         .returning();
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/bulk-delete",
@@ -159,23 +159,26 @@ const app = new Hono()
           .where(
             and(
               eq(accounts.userId, auth.userId),
-              inArray(transactions.id, values.ids)
-            )
-          )
+              inArray(transactions.id, values.ids),
+            ),
+          ),
       );
 
       const data = await db
         .with(transationsToDelete)
         .delete(transactions)
         .where(
-          inArray(transactions.id, sql`(select id from ${transationsToDelete})`)
+          inArray(
+            transactions.id,
+            sql`(select id from ${transationsToDelete})`,
+          ),
         )
         .returning({
           id: transactions.id,
         });
 
       return c.json({ data });
-    }
+    },
   )
   .patch(
     "/:id",
@@ -184,13 +187,13 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     zValidator(
       "json",
       insertTransactionSchema.omit({
         id: true,
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -210,7 +213,9 @@ const app = new Hono()
           .select({ id: transactions.id })
           .from(transactions)
           .innerJoin(accounts, eq(transactions.accountId, accounts.id))
-          .where(and(eq(accounts.userId, auth.userId), eq(transactions.id, id)))
+          .where(
+            and(eq(accounts.userId, auth.userId), eq(transactions.id, id)),
+          ),
       );
 
       const [data] = await db
@@ -220,7 +225,10 @@ const app = new Hono()
           ...values,
         })
         .where(
-          inArray(transactions.id, sql`(select id from ${transationsToUpdate})`)
+          inArray(
+            transactions.id,
+            sql`(select id from ${transationsToUpdate})`,
+          ),
         )
         .returning();
 
@@ -229,7 +237,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .delete(
     "/:id",
@@ -252,14 +260,19 @@ const app = new Hono()
           .select({ id: transactions.id })
           .from(transactions)
           .innerJoin(accounts, eq(transactions.accountId, accounts.id))
-          .where(and(eq(accounts.userId, auth.userId), eq(transactions.id, id)))
+          .where(
+            and(eq(accounts.userId, auth.userId), eq(transactions.id, id)),
+          ),
       );
 
       const [data] = await db
         .with(transationsToDelete)
         .delete(transactions)
         .where(
-          inArray(transactions.id, sql`(select id from ${transationsToDelete})`)
+          inArray(
+            transactions.id,
+            sql`(select id from ${transationsToDelete})`,
+          ),
         )
         .returning({
           id: transactions.id,
@@ -270,7 +283,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/bulk-create",
@@ -290,12 +303,12 @@ const app = new Hono()
           values.map((value) => ({
             ...value,
             id: createId(),
-          }))
+          })),
         )
         .returning();
 
       return c.json({ data });
-    }
+    },
   );
 
 export default app;

@@ -32,7 +32,7 @@ const app = new Hono()
         .where(eq(categories.userId, auth.userId));
 
       return c.json({ data });
-    }
+    },
   )
   .get(
     "/:id",
@@ -63,7 +63,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/",
@@ -72,7 +72,7 @@ const app = new Hono()
       "json",
       insertCategorySchema.pick({
         name: true,
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -92,7 +92,7 @@ const app = new Hono()
         .returning();
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/bulk-delete",
@@ -111,15 +111,15 @@ const app = new Hono()
         .where(
           and(
             eq(categories.userId, auth.userId),
-            inArray(categories.id, values.ids)
-          )
+            inArray(categories.id, values.ids),
+          ),
         )
         .returning({
           id: categories.id,
         });
 
       return c.json({ data });
-    }
+    },
   )
   .patch(
     "/:id",
@@ -128,13 +128,13 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     zValidator(
       "json",
       insertCategorySchema.pick({
         name: true,
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -162,7 +162,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .delete(
     "/:id",
@@ -192,7 +192,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   );
 
 export default app;
