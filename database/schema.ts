@@ -57,3 +57,21 @@ export const transactionsRelations = relations(transactions, ({ one }) => ({
 export const insertTransactionSchema = createInsertSchema(transactions, {
   date: z.coerce.date(),
 });
+
+export const userSettings = pgTable("user_settings", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().unique(),
+  currency: text("currency").default("usd"),
+  dateFormat: text("date_format").default("mm-dd-yyyy"),
+  fiscalYear: text("fiscal_year").default("january"),
+  theme: text("theme").default("light"),
+  chartStyle: text("chart_style").default("modern"),
+  notificationTransactions: integer("notification_transactions").default(1),
+  notificationBudgets: integer("notification_budgets").default(1),
+  notificationReports: integer("notification_reports").default(0),
+  twoFactorEnabled: integer("two_factor_enabled").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertUserSettingsSchema = createInsertSchema(userSettings);

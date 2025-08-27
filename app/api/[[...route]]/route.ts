@@ -3,6 +3,7 @@ import { handle } from "hono/vercel";
 import accounts from "./accounts";
 import categories from "./categories";
 import transactions from "./transactions";
+import userSettings from "./user-settings";
 import { logger } from "hono/logger";
 import summary from "./summary";
 
@@ -14,6 +15,7 @@ const app = new Hono()
   .route("/accounts", accounts)
   .route("/categories", categories)
   .route("/transactions", transactions)
+  .route("/user-settings", userSettings)
   .route("/summary", summary);
 // Define the main application route
 
