@@ -4,6 +4,7 @@ import { format, parse } from "date-fns";
 import React from "react";
 import { ImportTable } from "./import-table";
 
+// eslint-disable-entire-line @typescript-eslint/no-explicit-any
 type Props = {
   data: string[][];
   onSubmit: (data: any) => void;

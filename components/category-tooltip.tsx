@@ -1,7 +1,5 @@
-import { format } from "date-fns";
-import React from "react";
-import { Separator } from "./ui/separator";
 import { formatCurrency } from "@/lib/utils";
+import { Separator } from "./ui/separator";
 
 export const CategoryTooltip = ({ active, payload }: any) => {
   if (!active) {

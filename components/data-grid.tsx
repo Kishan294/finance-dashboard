@@ -12,7 +12,7 @@ export const DataGrid = () => {
   const params = useSearchParams();
   const from = params.get("from") || undefined;
   const to = params.get("to") || undefined;
-  const accountId = params.get("accountId") || undefined;
+  // const accountId = params.get("accountId") || undefined;
 
   const dateRangeLabel = formatDateRange({ from, to });
 
