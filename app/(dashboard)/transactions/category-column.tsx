@@ -8,7 +8,7 @@ type Props = {
   categoryId: string | null;
 };
 
-export const CategoryColumn = ({ id, category, categoryId }: Props) => {
+export const CategoryColumn = ({ category, categoryId }: Props) => {
   const { onOpen: onOpenCategory } = useOpenCategory();
 
   const onClick = () => {
